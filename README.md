@@ -8,6 +8,8 @@ Direct integration with ProGlove INSIGHT API for device management and analytics
 - ✅ Auto-token refresh (tokens expire after 1h)
 - ✅ Direct API access without MCP server overhead
 - ✅ Query devices, worker analytics, and scan data
+- ✅ AI-generated insights and narratives
+- ✅ Live notifications and alerts with time filtering
 - ✅ Auto-triggers when asking about ProGlove devices
 
 ## Installation
@@ -49,14 +51,21 @@ node scripts/insight-api.js devices/status
 # List all devices
 node scripts/insight-api.js devices
 
-# Get device details
-node scripts/insight-api.js devices/abc123
+# Get insights/narratives (formatted)
+node scripts/get-insights.js           # All levels
+node scripts/get-insights.js 333d9d    # Specific level
+
+# Get live notifications/alerts (formatted)
+node scripts/get-notifications.js                    # All notifications
+node scripts/get-notifications.js --recent-hours 24  # Last 24 hours
+node scripts/get-notifications.js --recent-hours 1   # Last 1 hour
 
 # Worker analytics
 node scripts/insight-api.js analytics/workers
 
-# Custom endpoint with POST
-node scripts/insight-api.js devices --method POST --body '{"name":"Scanner1"}'
+# Raw API access
+node scripts/insight-api.js newsfeed/insights/narrative/level/_
+node scripts/insight-api.js newsfeed/insights/narrative/notifications
 ```
 
 ### With OpenClaw
