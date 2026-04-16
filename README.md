@@ -8,6 +8,9 @@ Direct integration with ProGlove INSIGHT API for device management and analytics
 - ✅ Auto-token refresh (tokens expire after 1h)
 - ✅ Direct API access without MCP server overhead
 - ✅ Query devices, worker analytics, and scan data
+- ✅ **Level name resolution** — use human-readable names instead of IDs
+- ✅ **Organization hierarchy** — cached lookup with 1h TTL
+- ✅ **Devices by level** — filter devices by level name (e.g., "Tradefair")
 - ✅ AI-generated insights and narratives
 - ✅ Live notifications and alerts with time filtering
 - ✅ Auto-triggers when asking about ProGlove devices
@@ -51,9 +54,20 @@ node scripts/insight-api.js devices/status
 # List all devices
 node scripts/insight-api.js devices
 
+# List devices by level name (resolved automatically)
+node scripts/devices-by-level.js Tradefair          # All devices in Tradefair
+node scripts/devices-by-level.js Tradefair --online # Only online devices
+node scripts/devices-by-level.js Modex --offline    # Only offline devices
+
+# Resolve level names to IDs
+node scripts/resolve-level.js Tradefair    # Get level info (cached)
+node scripts/resolve-level.js --list       # List all levels with hierarchy
+node scripts/resolve-level.js --refresh    # Force refresh cache
+
 # Get insights/narratives (formatted)
 node scripts/get-insights.js           # All levels
 node scripts/get-insights.js 333d9d    # Specific level
+node scripts/get-insights.js Tradefair # By level name
 
 # Get live notifications/alerts (formatted)
 node scripts/get-notifications.js                    # All notifications

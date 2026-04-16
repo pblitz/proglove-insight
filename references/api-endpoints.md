@@ -7,10 +7,42 @@ All endpoints require:
 - `Authorization: Bearer {IdToken}` header
 - `X-Customer-ID: {customerId}` header
 
+## Organization Hierarchy
+
+### Get Organization Levels
+`GET /{customer_id}/gateways/organisation?entity_type=LEVEL`
+
+Returns the complete organizational hierarchy with levels.
+
+**Response:**
+```json
+{
+  "items": [
+    {
+      "node": {
+        "id": "333d9d",
+        "name": "Tradefair",
+        "parent_id": "_",
+        "depth": 1,
+        "path": ["_", "333d9d"],
+        "entity_type": "LEVEL"
+      }
+    }
+  ]
+}
+```
+
+**Fields:**
+- `id` - Unique level identifier
+- `name` - Human-readable level name
+- `parent_id` - Parent level ID (null for root)
+- `depth` - Hierarchy depth (0 = root)
+- `path` - Full path from root to this level
+
 ## Device Management
 
 ### List Devices
-`GET /devices`
+`GET /{customer_id}/devices`
 
 Response:
 ```json

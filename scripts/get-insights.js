@@ -17,9 +17,25 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const levelId = process.argv[2] || '_';
+const levelQuery = process.argv[2] || '_';
+
+let levelId = levelQuery;
+let levelName = levelQuery;
 
 try {
+  // Try to resolve level name to ID if not "_"
+  if (levelQuery !== '_' && !/^[a-f0-9]{6}$/i.test(levelQuery)) {
+    console.error(`[resolve] Resolving level: ${levelQuery}...`);
+    const levelResult = execSync(
+      `node ${__dirname}/resolve-level.js "${levelQuery}"`,
+      { encoding: 'utf8' }
+    );
+    const level = JSON.parse(levelResult);
+    levelId = level.id;
+    levelName = level.name;
+    console.error(`✓ Found: ${levelName} (${levelId})\n`);
+  }
+  
   const result = execSync(
     `node ${__dirname}/insight-api.js newsfeed/insights/narrative/level/${levelId}`,
     { encoding: 'utf8' }
@@ -32,7 +48,7 @@ try {
     process.exit(0);
   }
   
-  console.log(`\n📊 ProGlove Insights (Level: ${levelId})\n`);
+  console.log(`\n📊 ProGlove Insights (Level: ${levelName})\n`);
   console.log(`Total: ${data.insights.length}\n`);
   
   // Group by sentiment

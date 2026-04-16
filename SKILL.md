@@ -28,9 +28,23 @@ CUSTOMER_ID=demo0001 USERNAME=user@example.com PASSWORD=xxx node scripts/auth.js
 
 ## Common Operations
 
-**Check device status:**
+**List all devices:**
 ```bash
 node scripts/insight-api.js devices
+```
+
+**List devices by level name:**
+```bash
+node scripts/devices-by-level.js Tradefair          # All devices
+node scripts/devices-by-level.js Tradefair --online # Only online
+node scripts/devices-by-level.js Modex --offline    # Only offline
+```
+
+**Resolve level names to IDs:**
+```bash
+node scripts/resolve-level.js Tradefair    # Get level info
+node scripts/resolve-level.js --list       # List all levels
+node scripts/resolve-level.js --refresh    # Force refresh cache
 ```
 
 **Get insights/narratives (formatted):**
