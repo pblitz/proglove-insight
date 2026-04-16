@@ -42,6 +42,11 @@ Returns online/offline counts.
 
 Returns AI-generated insights and narratives for a specific organizational level.
 
+### Get Notifications/Alerts
+`GET /{customer_id}/newsfeed/insights/narrative/notifications`
+
+Returns live notifications and alerts across all organizational levels.
+
 **Parameters:**
 - `level_id` - Organizational level ID (use `_` for root/all levels)
 
@@ -73,6 +78,24 @@ Returns AI-generated insights and narratives for a specific organizational level
 **Common level_id values:**
 - `_` - Root level (all data)
 - Specific level IDs from hierarchy
+
+**Notifications Response:**
+```json
+{
+  "notifications": [
+    {
+      "insight_id": "6dae7a41-fbca-47af-aff8-416d29923249",
+      "last_notification_timestamp": 1776349225847,
+      "level_path": "_#333d9d#014e54"
+    }
+  ]
+}
+```
+
+**Fields:**
+- `insight_id` - Unique identifier for the alert/notification
+- `last_notification_timestamp` - Unix timestamp (ms) when notification was last triggered
+- `level_path` - Organizational hierarchy path (e.g., `_#333d9d#014e54`)
 
 ## Analytics
 

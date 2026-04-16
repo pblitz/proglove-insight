@@ -39,10 +39,17 @@ node scripts/get-insights.js           # All levels
 node scripts/get-insights.js 333d9d    # Specific level
 ```
 
-**Get insights (raw JSON):**
+**Get live notifications/alerts (formatted):**
+```bash
+node scripts/get-notifications.js                    # All notifications
+node scripts/get-notifications.js --recent-hours 1   # Last 1 hour
+node scripts/get-notifications.js --recent-hours 24  # Last 24 hours
+```
+
+**Get insights/notifications (raw JSON):**
 ```bash
 node scripts/insight-api.js newsfeed/insights/narrative/level/_
-node scripts/insight-api.js newsfeed/insights/narrative/level/{level_id}
+node scripts/insight-api.js newsfeed/insights/narrative/notifications
 ```
 
 **Get worker analytics:**
