@@ -35,6 +35,45 @@ Response:
 
 Returns online/offline counts.
 
+## Insights & Narratives
+
+### Get Insights/Narratives
+`GET /{customer_id}/newsfeed/insights/narrative/level/{level_id}`
+
+Returns AI-generated insights and narratives for a specific organizational level.
+
+**Parameters:**
+- `level_id` - Organizational level ID (use `_` for root/all levels)
+
+**Response:**
+```json
+{
+  "insights": [
+    {
+      "id": "...",
+      "template": { ... },
+      "sentiment": "NEUTRAL|POSITIVE|NEGATIVE",
+      "status": "UPDATED|NEW|SOLVED",
+      "rank": 1,
+      "icon": "TIPS_NEUTRAL",
+      "level_path": "_",
+      "new": true,
+      "saved": false,
+      "solved": false
+    }
+  ]
+}
+```
+
+**Sentiment types:**
+- `NEUTRAL` - Informational
+- `POSITIVE` - Good performance/improvement
+- `NEGATIVE` - Issues/warnings
+
+**Common level_id values:**
+- `_` - Root level (all data)
+- Specific level IDs from hierarchy
+
 ## Analytics
 
 ### Worker Analytics

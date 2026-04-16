@@ -30,12 +30,19 @@ CUSTOMER_ID=demo0001 USERNAME=user@example.com PASSWORD=xxx node scripts/auth.js
 
 **Check device status:**
 ```bash
-node scripts/insight-api.js devices/status
+node scripts/insight-api.js devices
 ```
 
-**List online devices:**
+**Get insights/narratives (formatted):**
 ```bash
-node scripts/insight-api.js devices --filter online
+node scripts/get-insights.js           # All levels
+node scripts/get-insights.js 333d9d    # Specific level
+```
+
+**Get insights (raw JSON):**
+```bash
+node scripts/insight-api.js newsfeed/insights/narrative/level/_
+node scripts/insight-api.js newsfeed/insights/narrative/level/{level_id}
 ```
 
 **Get worker analytics:**
