@@ -126,13 +126,13 @@ function httpsRequest(url, options = {}) {
 }
 
 async function callApi(tokens, endpoint, method, body) {
-  const url = `${tokens.baseUrl}/${endpoint.replace(/^\//, '')}`;
+  // URL pattern: {base_url}/{customer_id}/{endpoint}
+  const url = `${tokens.baseUrl}/${tokens.customerId}/${endpoint.replace(/^\//, '')}`;
   
   const options = {
     method,
     headers: {
-      'Authorization': `Bearer ${tokens.IdToken}`,
-      'X-Customer-ID': tokens.customerId,
+      'Authorization': tokens.IdToken,  // No "Bearer" prefix
       'Content-Type': 'application/json',
     },
   };
